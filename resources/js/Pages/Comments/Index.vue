@@ -25,8 +25,11 @@ defineProps({
                     <div
                         class="bg-white overflow-hidden shadow-sm sm:rounded-lg"
                     >
-                        <div class="p-6 text-gray-900">
-                            {{ post.body }}
+                        <div class="p-6 text-gray-900 space-y-3">
+                            <h2 class="font-semibold">
+                                {{ post.user.name }}
+                            </h2>
+                            <div>{{ post.body }}</div>
                         </div>
                     </div>
                 </div>
