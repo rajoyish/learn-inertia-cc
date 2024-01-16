@@ -1,9 +1,14 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 defineProps({
     posts: Array,
+});
+
+const form = useForm({
+    body: "",
 });
 </script>
 
@@ -21,6 +26,22 @@ defineProps({
 
         <div class="py-12">
             <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-4">
+                <form
+                    class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6"
+                >
+                {{ form }}
+                    <label for="body" class="sr-only">Body</label>
+                    <textarea
+                        v-model="form.body"
+                        name="body"
+                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full"
+                        id="body"
+                        cols="30"
+                        rows="5"
+                    ></textarea>
+                    <PrimaryButton type="submit">Post</PrimaryButton>
+                </form>
+
                 <div v-for="post in posts" :key="post.id">
                     <div
                         class="bg-white overflow-hidden shadow-sm sm:rounded-lg"
