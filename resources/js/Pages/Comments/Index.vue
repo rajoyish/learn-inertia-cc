@@ -12,7 +12,11 @@ const form = useForm({
 });
 
 const createPost = () => {
-    form.post("/comments");
+    form.post("/comments", {
+        onSuccess: () => {
+            form.reset();
+        },
+    });
 };
 </script>
 
@@ -43,7 +47,7 @@ const createPost = () => {
                         cols="30"
                         rows="5"
                     ></textarea>
-                    <PrimaryButton type="submit">Post</PrimaryButton>
+                    <PrimaryButton type="submit" class="mt-4">Post</PrimaryButton>
                 </form>
 
                 <div v-for="post in posts" :key="post.id">
