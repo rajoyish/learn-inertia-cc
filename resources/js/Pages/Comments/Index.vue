@@ -10,6 +10,10 @@ defineProps({
 const form = useForm({
     body: "",
 });
+
+const createPost = () => {
+    form.post("/comments");
+};
 </script>
 
 <template>
@@ -27,9 +31,9 @@ const form = useForm({
         <div class="py-12">
             <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-4">
                 <form
+                    v-on:submit.prevent="createPost"
                     class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6"
                 >
-                {{ form }}
                     <label for="body" class="sr-only">Body</label>
                     <textarea
                         v-model="form.body"
