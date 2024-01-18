@@ -14,6 +14,8 @@ const form = useForm({
 
 const createPost = () => {
 	form.post("/comments", {
+		preserveScroll: true,
+
 		onSuccess: () => {
 			form.reset();
 		},
