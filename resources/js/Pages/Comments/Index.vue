@@ -2,6 +2,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import InputError from "@/Components/InputError.vue";
 
 defineProps({
     posts: Array,
@@ -34,6 +35,7 @@ const createPost = () => {
 
         <div class="py-12">
             <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-4">
+                {{ form }}
                 <form
                     v-on:submit.prevent="createPost"
                     class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6"
@@ -47,7 +49,10 @@ const createPost = () => {
                         cols="30"
                         rows="5"
                     ></textarea>
-                    <PrimaryButton type="submit" class="mt-4">Post</PrimaryButton>
+                    <InputError :message="form.errors.body" />
+                    <PrimaryButton type="submit" class="mt-4"
+                        >Post</PrimaryButton
+                    >
                 </form>
 
                 <div v-for="post in posts" :key="post.id">
