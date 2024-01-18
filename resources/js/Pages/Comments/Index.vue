@@ -5,69 +5,57 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 
 defineProps({
-    posts: Array,
+	posts: Array,
 });
 
 const form = useForm({
-    body: "",
+	body: "",
 });
 
 const createPost = () => {
-    form.post("/comments", {
-        onSuccess: () => {
-            form.reset();
-        },
-    });
+	form.post("/comments", {
+		onSuccess: () => {
+			form.reset();
+		},
+	});
 };
 </script>
 
 <template>
-    <Head title="Comments">
-        <meta name="description" content="Comments Index" />
-    </Head>
+	<Head title="Comments">
+		<meta name="description" content="Comments Index" />
+	</Head>
 
-    <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Comments
-            </h2>
-        </template>
+	<AuthenticatedLayout>
+		<template #header>
+			<h2 class="font-semibold text-xl text-gray-800 leading-tight">
+				Comments
+			</h2>
+		</template>
 
-        <div class="py-12">
-            <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-4">
-                {{ form }}
-                <form
-                    v-on:submit.prevent="createPost"
-                    class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6"
-                >
-                    <label for="body" class="sr-only">Body</label>
-                    <textarea
-                        v-model="form.body"
-                        name="body"
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full"
-                        id="body"
-                        cols="30"
-                        rows="5"
-                    ></textarea>
-                    <InputError :message="form.errors.body" />
-                    <PrimaryButton type="submit" class="mt-4"
-                        >Post</PrimaryButton
-                    >
-                </form>
+		<div class="py-12">
+			<div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-4">
 
-                <div v-for="post in posts" :key="post.id">
-                    <div
-                        class="bg-white overflow-hidden shadow-sm sm:rounded-lg"
-                    >
-                        <div class="p-6 text-gray-900 space-y-3">
-                            <h2 class="font-semibold">
-                                {{ post.user.name }}
-                            </h2>
-                            <div>{{ post.body }}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </AuthenticatedLayout>
+				<form v-on:submit.prevent="createPost" class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+					<label for="body" class="sr-only">Body</label>
+					<textarea v-model="form.body" v-on:focus="form.clearErrors('body')" name="body"
+						class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full"
+						id="body" cols="30" rows="5"></textarea>
+					<InputError :message="form.errors.body" />
+					<PrimaryButton type="submit" class="mt-4">Post</PrimaryButton>
+				</form>
+
+				<div v-for="post in posts" :key="post.id">
+					<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+						<div class="p-6 text-gray-900 space-y-3">
+							<h2 class="font-semibold">
+								{{ post.user.name }}
+							</h2>
+							<div>{{ post.body }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</AuthenticatedLayout>
 </template>
