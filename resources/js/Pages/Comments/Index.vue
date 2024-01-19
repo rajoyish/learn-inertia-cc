@@ -1,8 +1,9 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, router, useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 defineProps({
 	posts: Array,
@@ -21,6 +22,15 @@ const createPost = () => {
 		},
 	});
 };
+
+const refreshComments = () => {
+	router.get('/comments', {}, {
+		preserveScroll: true,
+
+		only: ['posts']
+	});
+
+}
 </script>
 
 <template>
@@ -48,6 +58,10 @@ const createPost = () => {
 						Post
 					</PrimaryButton>
 				</form>
+
+				<div class="grid place-items-center">
+					<SecondaryButton v-on:click="refreshComments">Refresh Comments</SecondaryButton>
+				</div>
 
 				<div v-for="post in posts" :key="post.id">
 					<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
