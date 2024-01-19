@@ -16,6 +16,7 @@ class CommentStoreController extends Controller
      */
     public function __invoke(Request $request)
     {
+        // sleep(2);
         $this->validate($request, [
             'body' => ['required'],
         ]);
