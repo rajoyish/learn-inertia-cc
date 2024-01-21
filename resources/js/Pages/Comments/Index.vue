@@ -61,13 +61,14 @@ const refreshComments = () => {
 
 				<div class="grid place-items-center">
 					<SecondaryButton v-on:click="refreshComments">Refresh Comments</SecondaryButton>
+					<!-- <Link href="/comments" class="text-sm text-indigo-700" preserve-scroll :only="['posts']">Refresh comments</Link> -->
 				</div>
 
 				<div v-for="post in posts" :key="post.id">
 					<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 						<div class="p-6 text-gray-900 space-y-3">
 							<h2 class="font-semibold">
-								<Link :href="`/users/${post.user.id}`">{{ post.user.name }}</Link>
+								<Link :href="`/users/${post.user.id}`" preserve-scroll>{{ post.user.name }}</Link>
 							</h2>
 							<div>{{ post.body }}</div>
 						</div>
