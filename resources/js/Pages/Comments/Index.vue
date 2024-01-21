@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, router, useForm } from "@inertiajs/vue3";
+import { Head, router, useForm, Link } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
@@ -67,7 +67,7 @@ const refreshComments = () => {
 					<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 						<div class="p-6 text-gray-900 space-y-3">
 							<h2 class="font-semibold">
-								{{ post.user.name }}
+								<Link :href="`/users/${post.user.id}`">{{ post.user.name }}</Link>
 							</h2>
 							<div>{{ post.body }}</div>
 						</div>
