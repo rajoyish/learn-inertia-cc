@@ -17,7 +17,7 @@ const form = useForm({
 });
 
 const createPost = () => {
-	form.post("/comments", {
+	form.post(route('comments.store'), {
 		preserveScroll: true,
 
 		onSuccess: () => {
@@ -27,7 +27,7 @@ const createPost = () => {
 };
 
 const refreshComments = () => {
-	router.get('/comments', {}, {
+	router.get(route('comments.index'), {}, {
 		preserveScroll: true,
 
 		only: ['posts']
@@ -71,7 +71,7 @@ const refreshComments = () => {
 					<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 						<div class="p-6 text-gray-900 space-y-3">
 							<h2 class="font-semibold">
-								<Link :href="`/users/${post.user.id}`" preserve-scroll>{{ post.user.name }}</Link>
+								<Link :href="route('users.show', post.user)" preserve-scroll>{{ post.user.name }}</Link>
 							</h2>
 							<div>{{ post.body }}</div>
 						</div>
