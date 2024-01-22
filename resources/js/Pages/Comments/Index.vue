@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, router, useForm, Link } from "@inertiajs/vue3";
+import { Head, router, useForm, Link, usePage } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
@@ -9,8 +9,11 @@ defineProps({
 	posts: Array,
 });
 
+// const page = usePage()
+
 const form = useForm({
-	body: "",
+	body: '',
+	// body: page.props.auth.user.name,
 });
 
 const createPost = () => {
