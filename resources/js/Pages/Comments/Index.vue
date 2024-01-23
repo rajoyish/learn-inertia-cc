@@ -4,12 +4,15 @@ import { Head, router, useForm, Link, usePage } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
+import { useToast } from "vue-toastification";
 
 defineProps({
 	posts: Array,
 });
 
 // const page = usePage()
+
+const toast = useToast()
 
 const form = useForm({
 	body: '',
@@ -21,6 +24,7 @@ const createPost = () => {
 		preserveScroll: true,
 
 		onSuccess: () => {
+			toast('Comment posted.')
 			form.reset();
 		},
 	});
