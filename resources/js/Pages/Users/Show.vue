@@ -7,7 +7,10 @@
 		</template>
 
 		<div class="py-12">
-			<div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-4"> 
+			<div class="text-center mb-4">
+				<SecondaryButton v-on:click="loadComments">Load Comments</SecondaryButton>
+			</div>
+			<div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-4">
 				<div v-for="post in posts" :key="post.id">
 					<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 						<div class="p-6 text-gray-900 space-y-3">
@@ -24,11 +27,18 @@
 </template>
 
 <script setup>
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 
-defineProps({
+const props = defineProps({
 	user: Object,
 	posts: Array
 })
+
+const loadComments = () => {
+	router.get(route('users.show', props.user), {}, {
+		only: ['posts']
+	})
+}
 </script>
