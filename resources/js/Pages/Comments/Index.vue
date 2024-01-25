@@ -19,7 +19,7 @@ const page = usePage()
 // 	toast(message.body, { type: message.type })
 // })
 
-const form = useForm({
+const form = useForm('StoreComment',{
 	body: '',
 	// body: page.props.auth.user.name,
 });
