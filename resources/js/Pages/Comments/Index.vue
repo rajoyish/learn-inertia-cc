@@ -19,7 +19,7 @@ const page = usePage()
 // 	toast(message.body, { type: message.type })
 // })
 
-const form = useForm('StoreComment',{
+const form = useForm('StoreComment', {
 	body: '',
 	// body: page.props.auth.user.name,
 });
@@ -37,6 +37,8 @@ const createPost = () => {
 const refreshComments = () => {
 	router.get(route('comments.index'), {}, {
 		preserveScroll: true,
+ 
+		preserveState: true,
 
 		only: ['posts']
 	});
