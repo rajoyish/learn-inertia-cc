@@ -9,6 +9,7 @@ import { watch } from "vue";
 
 defineProps({
 	posts: Array,
+	can: Object
 });
 
 const page = usePage()
@@ -37,7 +38,7 @@ const createPost = () => {
 const refreshComments = () => {
 	router.get(route('comments.index'), {}, {
 		preserveScroll: true,
- 
+
 		preserveState: true,
 
 		only: ['posts']
@@ -60,7 +61,8 @@ const refreshComments = () => {
 
 		<div class="py-12">
 			<div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-4">
-				<form v-on:submit.prevent="createPost" class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+				<form v-on:submit.prevent="createPost" v-if="can.create_post"
+					class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
 					<label for="body" class="sr-only">Body</label>
 					<textarea v-model="form.body" v-on:focus="form.clearErrors('body')" name="body"
 						class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full" id="body"

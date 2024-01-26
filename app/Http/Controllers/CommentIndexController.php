@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class CommentIndexController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
     /**
      * Handle the incoming request.
      */
@@ -15,6 +20,10 @@ class CommentIndexController extends Controller
     {
         return inertia()->render('Comments/Index', [
             'posts' => PostResource::collection(Post::with('user')->latest()->get()),
+
+            'can' => [
+                'create_post' => auth()->user()->can('create', Post::class),
+            ],
         ]);
     }
 }
